@@ -16,10 +16,6 @@ import com.apap.tutorial3.service.CarService;
 
 @Controller
 public class CarController {
-	
-	public CarController() {
-		
-	}
 	@Autowired
 	private CarService mobilService;
 	
