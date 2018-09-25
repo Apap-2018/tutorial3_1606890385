@@ -73,8 +73,8 @@ public class CarController {
 		return html;
 	}
 	
-	@RequestMapping(value="/car/update/{id}/amount/{new_amount}", method=RequestMethod.GET)
-	public String updateById(@PathVariable Optional<String> id, @PathVariable Integer new_amount,  Model model) {
+	@RequestMapping(value= {"/car/update/{id}/amount/{new_amount}", "/car/update/amount/", "/car/update/{id}/amount/", "/car/update/amount/{new_amount}/"}, method=RequestMethod.GET)
+	public String updateById(@PathVariable Optional<String> id, @PathVariable (required = false)Integer new_amount,  Model model) {
 		String html = "";
 		if(id.isPresent()&& new_amount != null) {
 			CarModel archive = mobilService.getCarDetail(id.get());
@@ -89,13 +89,13 @@ public class CarController {
 			}
 		}
 		else {
-			model.addAttribute("result", "Tidak ada ID yang dimasukkan");
+			model.addAttribute("result", "Tidak ada ID atau amount yang dimasukkan");
 			html = "result";
 		}
 		return html;
 	}
 	
-	@RequestMapping(value="/car/delete/{id}", method=RequestMethod.GET)
+	@RequestMapping(value= {"/car/delete/{id}", "/car/delete/"}, method=RequestMethod.GET)
 	public String DeleteById(@PathVariable Optional<String> id,  Model model) {
 		if(id.isPresent()) {
 			CarModel archiv = mobilService.getCarDetail(id.get());
@@ -113,7 +113,7 @@ public class CarController {
 			}
 		}
 		else {
-			model.addAttribute("result", "Tidak ada ID");
+			model.addAttribute("result", "Gagal melakukan penghapusan, masukan URL dengan benar");
 		}
 		return "result";
 		
